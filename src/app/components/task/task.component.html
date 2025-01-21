@@ -1,0 +1,61 @@
+<li class="mt-2">
+  <div class="flex items-start gap-2 group ">
+    <label class="leading-6 w-full flex items-start">
+      <input [(ngModel)]="task().status" [checked]="task().status" [disabled]="editingState()"
+             class="mt-4 mr-2 accent-green-300"
+             name="test"
+             type="checkbox">
+      <div class="flex flex-col w-full items-start">
+        <app-editable-input [defaultText]="task().text" [status]="task().status" [withToggle]="false"/>
+        <aside *ngIf="editingState()" aria-label="actions"
+               class="flex gap-2 mb-2">
+          <button (click)="onUpdateTask()"
+                  class="border py-1 px-2 rounded-lg mt-2 bg-green-100 text-green-600">
+            Update
+          </button>
+          <button (click)="onToggleTaskEditing()"
+                  class="border py-1 px-2 rounded-lg mt-2 bg-orange-100 text-orange-600">Cancel
+          </button>
+        </aside>
+      </div>
+    </label>
+
+    <img (click)="onToggleTaskEditing()" alt="edit"
+         class="invisible group-hover:visible cursor-pointer" height="24"
+         ngSrc="assets/pencil.svg" width="24"
+    >
+  </div>
+  <div class="flex gap-x-2 items-center ml-3">
+    <div
+      (click)="editProperty(task(),'rate')"
+      class="text-xs bg-green-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block hover:shadow-sm cursor-pointer">
+      {{ task().rate }}€/h
+    </div>
+    <div
+      (click)="editProperty(task(),'duration')"
+      class="text-xs bg-green-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block hover:shadow-sm cursor-pointer">
+      {{ task().duration }}h
+    </div>
+    <div
+      class="text-xs bg-gray-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block">
+      {{ getTaskPrice(task().duration, task().rate) }}€
+    </div>
+
+    <div
+      (click)="editProperty(task(),'due')"
+      class="relative text-xs border rounded-full px-1 py-1 my-1 text-gray-900 inline-flex gap-x-2 items-center hover:shadow-sm cursor-pointer">
+      <img alt="Due date" src="./assets/calendar.svg">
+      <span>
+        Due: {{ task().due }}
+      </span>
+    </div>
+  </div>
+  <hr class="w-full border">
+</li>
+
+<app-input-modal/>
+
+
+
+
+

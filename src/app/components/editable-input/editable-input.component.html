@@ -1,0 +1,20 @@
+<div class="flex gap-1 group my-2">
+  <div #editInput
+       [contentEditable]="isEditable()"
+       [ngClass]="{'line-through': status() && !isEditable()}"
+       class="w-full max-w-80 whitespace-pre-wrap inline-block "
+       spellcheck="false"
+  >
+    @if (isEditable()) {
+      {{ text() }}
+    } @else {
+      {{ defaultText() }}
+    }
+  </div>
+
+  <img (click)="onToggleTaskEditing()" *ngIf="withToggle()"
+       alt="edit" class="invisible group-hover:visible cursor-pointer"
+       height="24" ngSrc="assets/pencil.svg"
+       width="24"
+  >
+</div>

@@ -1,0 +1,49 @@
+<form (ngSubmit)="onHandleSubmit()" [formGroup]="taskForm" action=""
+      class="flex flex-col gap-x-4 gap-y-4 max-w-screen-md">
+  <div class="flex gap-x-4">
+    <label class="flex flex-col flex-1" for="text">
+      Text
+      <input class="border px-2 py-2 rounded-lg" formControlName="text" id="text"
+             name="text" type="text">
+    </label>
+
+    <label class="flex flex-col flex-1" for="due">
+      Due
+      <input class="border px-2 py-2 rounded-lg" formControlName="due" id="due"
+             name="due" type="date">
+    </label>
+  </div>
+
+  <div class="flex gap-x-4">
+    <label class="flex flex-col flex-1" for="duration">
+      Duration (h)
+
+      <input class="border px-2 py-2 rounded-lg" formControlName="duration" id="duration"
+             name="duration" type="number">
+    </label>
+
+    <label class="flex flex-col flex-1" for="rate">
+      <span class="font-bold">Rate (€/hour)</span>
+      <input class="border px-2 py-2 rounded-lg" formControlName="rate" id="rate"
+             name="rate" placeholder="€/h" type="number">
+
+    </label>
+  </div>
+
+  <div>
+    <label class="flex flex-col" for="tags">
+      <span class="font-bold">
+        Tags
+      </span>
+      <select class="border rounded-lg py-2 px-3" formControlName="tags" id="tags" multiple="true" name="tags">
+        <option value="code">Code</option>
+        <option value="design">Design</option>
+        <option value="work">Work</option>
+        <option value="work">Meetings</option>
+      </select>
+
+    </label>
+  </div>
+
+  <button class="border rounded-lg py-2 shadow-sm" type="submit">Create task</button>
+</form>
