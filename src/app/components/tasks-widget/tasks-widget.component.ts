@@ -6,15 +6,14 @@ import {WidgetComponent} from "../shared/widget/widget.component";
 import {TasksService} from "../../services/tasks.service";
 
 @Component({
-  selector: 'app-tasks-widget',
-  standalone: true,
-  imports: [
-    FormsModule,
-    TasksListComponent,
-    WidgetComponent
-  ],
-  templateUrl: './tasks-widget.component.html',
-  styleUrl: './tasks-widget.component.scss'
+    selector: 'app-tasks-widget',
+    imports: [
+        FormsModule,
+        TasksListComponent,
+        WidgetComponent
+    ],
+    templateUrl: './tasks-widget.component.html',
+    styleUrl: './tasks-widget.component.scss'
 })
 export class TasksWidgetComponent implements OnInit {
 

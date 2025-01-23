@@ -1,51 +1,60 @@
-import {Component, HostListener, inject, input, signal, viewChild} from '@angular/core';
+import {Component, HostListener, inject, input, OnInit, signal, viewChild} from '@angular/core';
 import {Task} from "../../interfaces/task";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {EditableInputComponent} from "../editable-input/editable-input.component";
-import {InputModalComponent} from "../shared/input-modal/input-modal.component";
+import {FormModalComponent} from "../shared/form-modal/form-modal.component";
 import {ModalData} from "../../interfaces/modal-data";
 import {TasksService} from "../../services/tasks.service";
+import {TaskForm} from "../../interfaces/task-form";
 
 
 @Component({
   selector: 'app-task',
-  standalone: true,
   imports: [
     FormsModule,
     NgOptimizedImage,
     NgIf,
     EditableInputComponent,
-    InputModalComponent
+    ReactiveFormsModule
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   task = input.required<Task>();
-  editingState = signal<false | 'plaintext-only'>(false);
-  editableInput = viewChild<EditableInputComponent>(EditableInputComponent)
-  inputModal = viewChild<InputModalComponent>(InputModalComponent);
+  formModal = viewChild<FormModalComponent>(FormModalComponent);
   taskService = inject(TasksService);
+  editTaskForm: FormGroup;
+  taskEditing = signal(false);
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     //
+  }
+
+  ngOnInit() {
+    //TODO: Rework
+    this.editTaskForm = this.fb.group<TaskForm>({
+      text: new FormControl({value: this.task().text, disabled: true}),
+      due: new FormControl({value: this.task().due, disabled: false}),
+      duration: new FormControl({value: this.task().duration, disabled: true}),
+      rate: new FormControl({value: this.task().rate, disabled: false}),
+      tags: new FormControl({value: this.task().tags, disabled: false}),
+      status: new FormControl({value: this.task().status, disabled: false}),
+    })
   }
 
 
   @HostListener('window:keyup.esc', ['$event'])
   onEsc(event: MouseEvent) {
-    if (this.editingState() != false) {
+    if (this.taskEditing() != false) {
       this.onToggleTaskEditing();
     }
   }
 
-  onUpdateTask() {
-    //PALO - ViewChild vracia EditableInputComponent alebo undefined. Rovnako ako všetky ostatné viewChild.
-    //Rieši sa to takto alebo je nejaká alternatíva?
-    //If statement kde overujem či nie je undefined nefunguje, môžeš skúsiť.
-    this.task().text = this.editableInput()?.onGetNewText() ?? '';
-    console.log("THIS IS NEW TEXT", this.task().text);
+  onSubmit(id: number) {
+    this.editTaskForm.getRawValue()
+    this.taskService.update(this.task().id, this.editTaskForm.getRawValue())
     this.onToggleTaskEditing();
   }
 
@@ -55,7 +64,15 @@ export class TaskComponent {
   }
 
   onToggleTaskEditing() {
-    this.editingState.set(this.editableInput()?.onToggleTaskEditing() ? 'plaintext-only' : false);
+    const state = this.taskEditing();
+    this.taskEditing.set(!state);
+    if (this.taskEditing()) {
+      this.editTaskForm.get('text').enable();
+      this.editTaskForm.get('status').disable();
+      return
+    }
+    this.editTaskForm.get('text').disable();
+    this.editTaskForm.get('status').enable();
   }
 
   editProperty(task: Task, property: keyof Task) {
@@ -67,10 +84,10 @@ export class TaskComponent {
       taskId: task.id, // Optional: If needed for identifying the task
     }
 
-    this.inputModal().open(propertyData)
+    this.formModal().open(propertyData)
 
     // Subscribe to the save event
-    const saveSubscription = this.inputModal().save.subscribe((data: ModalData) => {
+    const saveSubscription = this.formModal().save.subscribe((data: ModalData) => {
       this.onPropertyUpdate(data);
 
       // Optionally, clean up the subscription to avoid memory leaks

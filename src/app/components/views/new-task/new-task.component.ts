@@ -6,14 +6,13 @@ import {TaskForm} from "../../../interfaces/task-form";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-new-task',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './new-task.component.html',
-  styleUrl: './new-task.component.scss'
+    selector: 'app-new-task',
+    imports: [
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './new-task.component.html',
+    styleUrl: './new-task.component.scss'
 })
 export class NewTaskComponent {
 

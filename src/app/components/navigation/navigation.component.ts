@@ -3,14 +3,13 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {routes} from "../../app.routes";
 
 @Component({
-  selector: 'app-navigation',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+    selector: 'app-navigation',
+    imports: [
+        RouterLink,
+        RouterLinkActive
+    ],
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
 

@@ -45,5 +45,13 @@ export class TasksService {
     this.tasks.push(task);
   }
 
+  update(id: number, editedTask: Task) {
+    this.tasks.forEach((task) => {
+      if (task.id === id) {
+        task = editedTask
+      }
+    })
+  }
+
 
 }

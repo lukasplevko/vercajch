@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-notes',
-  standalone: true,
-  imports: [],
-  templateUrl: './notes.component.html',
-  styleUrl: './notes.component.scss'
+    selector: 'app-notes',
+    imports: [],
+    templateUrl: './notes.component.html',
+    styleUrl: './notes.component.scss'
 })
 export class NotesComponent {
 

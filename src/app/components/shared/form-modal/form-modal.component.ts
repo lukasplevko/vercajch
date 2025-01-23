@@ -3,15 +3,14 @@ import {FormsModule} from "@angular/forms";
 import {ModalData} from "../../../interfaces/modal-data";
 
 @Component({
-  selector: 'app-input-modal',
-  standalone: true,
+  selector: 'form-modal',
   imports: [
     FormsModule
   ],
-  templateUrl: './input-modal.component.html',
-  styleUrl: './input-modal.component.scss'
+  templateUrl: './form-modal.component.html',
+  styleUrl: './form-modal.component.scss'
 })
-export class InputModalComponent {
+export class FormModalComponent {
 
   inputModal = viewChild<ElementRef<HTMLDivElement>>('inputModal');
   backdrop = viewChild<ElementRef<HTMLDivElement>>('backdrop');
@@ -20,7 +19,6 @@ export class InputModalComponent {
   save = output<ModalData>();
 
   open(data: ModalData) {
-
     this.data.set(data);
     //TODO: Refactor ked bude cas.
     const cls = ['visible', 'pointer-events-all', 'scale-1']

@@ -4,6 +4,10 @@
     <app-tasks-widget/>
   </div>
   <div class="flex gap-4 flex-wrap">
+    <div>
+      <canvas *ngIf="isBrowser" [data]="barChartData.data" [options]="barChartData.options" [type]="barChartData.type"
+              baseChart></canvas>
+    </div>
     <div>My earnings from the start of 2025</div>
     <div class="flex-1">List of clients I currently have</div>
   </div>
