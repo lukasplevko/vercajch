@@ -1,7 +1,9 @@
 <app-widget>
-  <app-tasks-list [tasks]="tasks"/>
-  <a
+  <app-tasks-list [tasks]="tasks()"/>
+  <button
+    (click)="createTask()"
     class="inline-block border rounded-lg px-3 py-2 mt-4 shadow-sm hover:shadow-lg hover:text-black  text-gray-500 transition-all"
-    href="/tasks/new">+ Add
-    task</a>
+  >+ Add
+    task
+  </button>
 </app-widget>

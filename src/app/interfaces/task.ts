@@ -5,6 +5,7 @@ export interface Task {
   duration: number,
   rate: number,
   created_at: Date,
+  finished_at: string,
   tags: string[],
   status: boolean
 }

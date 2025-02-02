@@ -1,0 +1,8 @@
+<div #backdrop
+     (click)="onClose()"
+     class="bg-white/60 h-screen w-screen absolute left-0 top-0 z-0 transition-all"></div>
+<div #modal
+     class="bg-white shadow-lg border rounded-lg px-4 py-6 absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/4 scale-75 transition-transform">
+  <h1 class="font-semibold"></h1>
+  <ng-content></ng-content>
+</div>

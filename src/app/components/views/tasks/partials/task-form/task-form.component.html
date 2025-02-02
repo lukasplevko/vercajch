@@ -1,4 +1,4 @@
-<form (ngSubmit)="onHandleSubmit()" [formGroup]="taskForm" action=""
+<form (ngSubmit)="onHandleSubmit()" [formGroup]="form" action=""
       class="flex flex-col gap-x-4 gap-y-4 max-w-screen-md">
   <div class="flex gap-x-4">
     <label class="flex flex-col flex-1" for="text">
@@ -45,5 +45,16 @@
     </label>
   </div>
 
-  <button class="border rounded-lg py-2 shadow-sm" type="submit">Create task</button>
+  <button class="border rounded-lg py-2 shadow-sm" type="submit">
+    @if (hasExistingTask) {
+      <span>
+        Update task
+      </span>
+    } @else {
+      <span>
+        Crete task
+      </span>
+    }
+
+  </button>
 </form>

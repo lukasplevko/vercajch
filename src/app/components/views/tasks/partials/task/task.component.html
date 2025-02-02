@@ -1,0 +1,53 @@
+<li class="mt-2">
+  <div class="flex items-start gap-2 group ">
+    <div class="leading-6 w-full flex items-center gap-x-2">
+
+      <input
+        (change)="onStatusChange()"
+        [checked]="task().status"
+        [id]="'status-'+task().id"
+        class="accent-green-300"
+        name="status"
+        type="checkbox"
+      >
+      <label [for]="'status-'+task().id" [ngClass]="task().status ? 'line-through' : '' ">
+        {{ task().text }}
+      </label>
+    </div>
+
+
+    <img (click)="editTask()" alt="edit"
+         class="invisible group-hover:visible cursor-pointer" height="24"
+         ngSrc="../../../../../../assets/pencil.svg" width="24"
+    >
+  </div>
+  <div class="flex gap-x-2 items-center ml-3">
+    <div
+      class="text-xs bg-green-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block hover:shadow-sm cursor-pointer">
+      {{ task().rate }}€/h
+    </div>
+    <div
+      class="text-xs bg-green-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block hover:shadow-sm cursor-pointer">
+      {{ task().duration }}h
+    </div>
+    <div
+      class="text-xs bg-gray-100 rounded-full px-1 py-1 my-1 text-gray-900 inline-block">
+      {{ getTaskPrice(task().duration, task().rate) }}€
+    </div>
+
+    <div
+      class="relative text-xs border rounded-full px-1 py-1 my-1 text-gray-900 inline-flex gap-x-2 items-center hover:shadow-sm cursor-pointer">
+      <img alt="Due date" height="24" ngSrc="../../../../../../assets/calendar.svg" width="24">
+      <span>
+        Due: {{ task().due }}
+      </span>
+    </div>
+  </div>
+  <hr class="w-full border">
+</li>
+
+
+
+
+
+
