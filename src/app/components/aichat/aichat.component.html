@@ -1,0 +1,5 @@
+<form (ngSubmit)="onSubmit()">
+  <label for="chat">Chat</label>
+  <textarea [formControl]="prompt" id="chat" placeholder="What can i help you with?"></textarea>
+  <button type="submit">Answer</button>
+</form>

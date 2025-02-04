@@ -6,6 +6,7 @@ import {WidgetComponent} from "../../../../shared/widget/widget.component";
 import {TasksService} from "../../../../../services/tasks/tasks.service";
 import {ModalService} from "../../../../../services/modal/modal.service";
 import {TaskFormComponent} from "../task-form/task-form.component";
+import {AIChatComponent} from "../../../../aichat/aichat.component";
 
 @Component({
   selector: 'app-tasks-widget',
@@ -28,5 +29,9 @@ export class TasksWidgetComponent {
 
   createTask() {
     this.modalService.open(TaskFormComponent);
+  }
+
+  generateTask() {
+    this.modalService.open(AIChatComponent)
   }
 }

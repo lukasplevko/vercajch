@@ -19,6 +19,7 @@ export class ModalService {
     const newComponent = createComponent(component, {
       environmentInjector: this.injector
     })
+    console.log("Open");
 
     this.newModal = createComponent(ModalComponent, {
       environmentInjector: this.injector,

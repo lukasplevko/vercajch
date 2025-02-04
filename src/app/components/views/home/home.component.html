@@ -5,6 +5,14 @@
     @if (tasks()) {
       <app-chart [data]="tasks()" [usage]="ChartUsage.INCOME"/>
     }
+
+
+  </div>
+
+  <div>
+
+    <button (click)="onOpenInvoiceModal()" class="border rounded-lg shadow-sm inline-block py-2 px-4">Generate invoice
+    </button>
   </div>
 
 </div>
