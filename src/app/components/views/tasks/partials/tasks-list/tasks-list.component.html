@@ -1,5 +1,54 @@
-<ul>
-  @for (task of tasks(); track task.id) {
-    <app-task [task]="task"/>
-  }
-</ul>
+@if (!tasks() || tasks().length === 0) {
+  <p class="text-center mt-4 mb-8">All finished, <a href="#" (click)="onCreateTask($event)"
+                                                    class="text-indigo-500">Add
+    a new
+    task</a></p>
+} @else {
+  <table class="table-fixed border-collapse text-left text-sm">
+    <thead>
+    <tr>
+      <th
+        class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 rounded-tl-lg w-52">
+        Task
+      </th>
+      <th class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 w-24">Tags</th>
+      <th class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 w-24">Duration</th>
+      <th class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 w-24">Rate</th>
+      <th class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 w-24">Price</th>
+      <th class="py-2 px-2 text-left font-bold text-gray-800 bg-gray-100 rounded-tr-lg w-24">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (task of tasks(); track task.id) {
+        @if ($even) {
+          <tr class="group" @fade>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200 ">{{ task.text }}</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200 ">{{ task.tags }}</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200 ">{{ task.duration }}h</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200 ">{{ task.rate }}€/h</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200 ">{{ getTaskPrice(task) }}€
+            </td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-200">
+              <app-task-actions (onEditTask)="onEditTask($event)" (onStatusChange)="onStatusChange($event)"
+                                [task]="task"/>
+            </td>
+          </tr>
+        } @else {
+          <tr class="group" @fade>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">{{ task.text }}</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">{{ task.tags }}</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">{{ task.duration }}</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">{{ task.rate }}€/h</td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">{{ getTaskPrice(task) }}€
+            </td>
+            <td class="py-3 px-2 text-left text-gray-800 bg-gray-100 ">
+              <app-task-actions (onEditTask)="onEditTask($event)" (onStatusChange)="onStatusChange($event)"
+                                [task]="task"/>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+
+}

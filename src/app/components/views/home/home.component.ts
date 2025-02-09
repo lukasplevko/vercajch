@@ -7,6 +7,7 @@ import {Task} from "../../../interfaces/task";
 import {TasksService} from "../../../services/tasks/tasks.service";
 import {ModalService} from "../../../services/modal/modal.service";
 import {InvoiceComponent} from "../../invoice/invoice.component";
+import {BtnComponent} from "../../shared/btn/btn.component";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {InvoiceComponent} from "../../invoice/invoice.component";
     CalendarComponent,
     TasksWidgetComponent,
     ChartComponent,
+    BtnComponent,
 
   ],
   templateUrl: './home.component.html',

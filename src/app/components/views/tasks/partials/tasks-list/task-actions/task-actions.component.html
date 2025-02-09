@@ -1,0 +1,15 @@
+<div class="flex gap-2">
+  <app-btn (click)="editTask()">
+    <object class="w-5 pointer-events-none" data="assets/pencil.svg" type="image/svg+xml">
+    </object>
+  </app-btn>
+  <app-btn (click)="changeStatus()">
+    @if (!task().status) {
+      <object class="w-5 pointer-events-none" data="assets/check.svg" type="image/svg+xml">
+      </object>
+    } @else {
+      <object class="w-5 pointer-events-none" data="assets/cancel.svg" type="image/svg+xml">
+      </object>
+    }
+  </app-btn>
+</div>

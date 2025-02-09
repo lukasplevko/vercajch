@@ -5,20 +5,24 @@ import {TasksService} from "../../../../../services/tasks/tasks.service";
 import {TaskForm} from "../../../../../interfaces/task-form";
 import {ModalService} from "../../../../../services/modal/modal.service";
 import {ModalForm} from "../../../../../interfaces/modal-form";
+import {BtnComponent} from "../../../../shared/btn/btn.component";
 
 @Component({
   selector: 'app-task-form',
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    BtnComponent,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss'
 })
 export class TaskFormComponent implements ModalForm<TaskForm, Task> {
 
-  taskService = inject(TasksService);
+  tasksService = inject(TasksService);
   modalService = inject(ModalService);
+  tags = this.tasksService.tags();
+
   form = new FormGroup<TaskForm>({
     text: new FormControl<string>(''),
     due: new FormControl<string>(''),
@@ -30,20 +34,24 @@ export class TaskFormComponent implements ModalForm<TaskForm, Task> {
   })
   hasExistingTask: boolean = false;
   taskId: number | null = null;
+  btnText: string = 'Create task';
 
   populateForm(data: Task) {
+    console.log("Populate", data);
     this.form.patchValue(data);
     this.taskId = data.id;
     this.hasExistingTask = true;
+    this.btnText = 'Update task';
   }
 
   onHandleSubmit() {
     if (this.hasExistingTask) {
-      this.taskService.update(this.taskId, this.form);
+      this.tasksService.update(this.taskId, this.form);
     } else {
-      this.taskService.store(this.form)
+      this.tasksService.store(this.form)
     }
     this.modalService.close();
   }
+
 
 }

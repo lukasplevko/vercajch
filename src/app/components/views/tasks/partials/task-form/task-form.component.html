@@ -1,12 +1,14 @@
 <form (ngSubmit)="onHandleSubmit()" [formGroup]="form" action=""
       class="flex flex-col gap-x-4 gap-y-4 max-w-screen-md">
-  <div class="flex gap-x-4">
+  <div>
     <label class="flex flex-col flex-1" for="text">
       Text
       <input class="border px-2 py-2 rounded-lg" formControlName="text" id="text"
              name="text" type="text">
     </label>
 
+  </div>
+  <div class="flex gap-x-4">
     <label class="flex flex-col flex-1" for="due">
       Due
       <input class="border px-2 py-2 rounded-lg" formControlName="due" id="due"
@@ -35,26 +37,16 @@
       <span class="font-bold">
         Tags
       </span>
-      <select class="border rounded-lg py-2 px-3" formControlName="tags" id="tags" multiple="true" name="tags">
-        <option value="code">Code</option>
-        <option value="design">Design</option>
-        <option value="work">Work</option>
-        <option value="work">Meetings</option>
+      <select class="border rounded-lg py-2 px-3" formControlName="tags" id="tags" multiple="multiple" name="tags">
+        @for (tag of tags(); track $index) {
+          <option [value]="tag">{{ tag }}</option>
+        }
       </select>
 
     </label>
   </div>
 
-  <button class="border rounded-lg py-2 shadow-sm" type="submit">
-    @if (hasExistingTask) {
-      <span>
-        Update task
-      </span>
-    } @else {
-      <span>
-        Crete task
-      </span>
-    }
-
-  </button>
+  <app-btn type="submit">
+    {{ btnText }}
+  </app-btn>
 </form>

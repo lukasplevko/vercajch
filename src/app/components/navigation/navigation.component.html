@@ -2,8 +2,9 @@
   @for (link of links; track $index) {
     <li>
       <a
-        class="border border-transparent font-extralight transition-colors hover:bg-gray-200 py-2 px-4 w-full inline-block "
-        [routerLink]="link.path" routerLinkActive="bg-gray-200" ariaCurrentWhenActive="location">{{ link.title }}</a>
+        class="border border-transparent rounded-r-md font-extralight transition-colors hover:bg-gray-200 py-2 px-4 w-full inline-block "
+        [routerLink]="link.path" routerLinkActive="bg-zinc-100 hover:bg-zinc-100"
+        ariaCurrentWhenActive="location">{{ link.title }}</a>
     </li>
   }
 </ul>

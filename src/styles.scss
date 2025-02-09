@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+$delays: (75, 150, 250);
+
+@each $delay in $delays {
+  .animation-delay-#{$delay} {
+    animation-delay: #{$delay}ms;
+  }
+}

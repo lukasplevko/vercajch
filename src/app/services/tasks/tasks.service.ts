@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {computed, Injectable, signal} from '@angular/core';
 import {Task} from "../../interfaces/task";
 import {TaskForm} from "../../interfaces/task-form";
 import {FormGroup} from "@angular/forms";
@@ -18,8 +18,8 @@ export class TasksService {
         rate: 5.5,
         created_at: new Date(Date.now()),
         finished_at: '2025-07-22',
-        tags: ['code', 'Sedlo Čertovica'],
-        status: true
+        tags: ['Code'],
+        status: false
       },
       {
         id: 2,
@@ -29,7 +29,7 @@ export class TasksService {
         rate: 13,
         created_at: new Date(Date.now()),
         finished_at: '2025-07-22',
-        tags: ['figma', 'Sedlo Čertovica'],
+        tags: ['Design'],
         status: false
       }
     ]
@@ -40,7 +40,7 @@ export class TasksService {
   }
 
   all() {
-    return this.tasks();
+    return computed(() => this.tasks())
   }
 
   find(id: number) {
@@ -53,7 +53,9 @@ export class TasksService {
       created_at: new Date(Date.now()),
       ...formValues.getRawValue(),
     }
-    this.tasks().push(task);
+    const tasks = [...this.tasks(), task]
+
+    this.tasks.update(() => tasks);
   }
 
   update(id: number, formValues: FormGroup<TaskForm>) {
@@ -63,9 +65,19 @@ export class TasksService {
       }
       return task;
     });
-    this.tasks.set(tasks);
-    console.log("tasks", this.tasks())
+    this.tasks.update(() => tasks)
   }
 
+  tags() {
+    const uniqueTasks = computed(() => Array.from(new Set(this.tasks().flatMap((task) => {
+      return task.tags;
+    }))))
+
+    return computed(() => ['All', 'Finished', ...uniqueTasks()])
+  }
+
+  categories() {
+    //
+  }
 
 }

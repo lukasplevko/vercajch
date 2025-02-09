@@ -1,0 +1,15 @@
+<div class="flex items-center gap-x-2 pl-4">
+  <div class="flex gap-1">
+    <div class="w-2 h-2 rounded-full bg-gray-600 animate-bounce animation-delay-75"></div>
+    <div class="w-2 h-2 rounded-full bg-gray-600 animate-bounce animation-delay-150"></div>
+    <div class="w-2 h-2 rounded-full bg-gray-600 animate-bounce animation-delay-250"></div>
+  </div>
+  <ul>
+    @for (text of loaderList; track $index) {
+      <li class="animate-pulse transition-all" [class.hidden]="currentTaskIndex() !== $index">
+        {{ text }}
+      </li>
+    }
+  </ul>
+
+</div>

@@ -4,6 +4,7 @@ import {routes} from './app.routes';
 import {provideClientHydration} from '@angular/platform-browser';
 import {provideCharts, withDefaultRegisterables} from 'ng2-charts';
 import {provideHttpClient} from "@angular/common/http";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideCharts(withDefaultRegisterables()),
     provideCharts(withDefaultRegisterables()),
     provideHttpClient(),
+    provideAnimations(),
   ]
 };
